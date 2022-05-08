@@ -38,3 +38,5 @@ export const PaypalOrderSnapshot = (): Promise<PaypalOrderShape> =>
 export const RouterPush = (route: string, replaceState = true) => {
 	goto(route.startsWith("/") ? route : `/${route}`, { replaceState });
 };
+
+// import.meta.env.VITE_API_SECRET_KEY

@@ -11,7 +11,7 @@
 	const LoadPaypal = async () => {
 		try {
 			const Paypal = await loadScript({
-				"client-id": import.meta.env.DEV ? "test" : "",
+				"client-id": import.meta.env.DEV ? "test" : import.meta.env.VITE_PAYPAL_ID,
 				currency: "EUR"
 			});
 			if (!Paypal) throw new Error("No Paypal Instance");
