@@ -1,5 +1,5 @@
 import type { VercelResponse, VercelRequest } from "@vercel/node";
-import type { ApiRes, DBShape, TicketsShape, UserToTicketShape } from "../interface/_interfaces";
+import type { ApiRes, DBShape, TicketsShape } from "../interface/_interfaces";
 import {
 	HandleError,
 	HandleSuccess,
