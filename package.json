@@ -1,7 +1,7 @@
 {
 	"name": "tombola-lycee",
 	"private": true,
-	"version": "1.0.0-alpha",
+	"version": "1.0.0-beta",
 	"description": "Site de la Tombola 2022 du Lycée du Mont-Blanc",
 	"keywords": [
 		"Tombola",

@@ -19,10 +19,20 @@ export interface PaypalOrderShape {
 	CustomerPhone: string;
 }
 
-export interface TicketsShape extends PaypalOrderShape {
+export interface TicketsShape {
 	TicketId: string;
 	firstName: string;
 	lastName: string;
 	email: string;
 	phone: string;
+}
+
+export interface UserToTicketShape {
+	[email: string]: string; // email => OrderID
+}
+
+export interface DBShape {
+	tickets: TicketsShape[];
+	userToTicket: UserToTicketShape;
+	TicketToUser: UserToTicketShape;
 }

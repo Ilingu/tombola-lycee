@@ -1,7 +1,17 @@
 import type { VercelResponse, VercelRequest } from "@vercel/node";
-import type { ApiRes } from "../interface/_interfaces";
+import type { ApiRes, DBShape, TicketsShape, UserToTicketShape } from "../interface/_interfaces";
+import {
+	HandleError,
+	HandleSuccess,
+	Authentificator,
+	ParseRequest,
+	CreateTombolaId
+} from "../utils/_ServerFunc";
 
-import { HandleError, HandleSuccess, Authentificator, ParseRequest } from "../utils/_ServerFunc";
+// DB
+import db from "../DB/_DB.json";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	// Utils Func
@@ -25,7 +35,36 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		const { success: AuthSucceed } = Authentificator(AuthKey);
 		if (!AuthSucceed) return Respond(HandleError("Wrong Auth Key", 400)); // ❌
 
-		return Respond(HandleSuccess());
+		const {
+			OrderId: RawOrderId,
+			firstName,
+			lastName,
+			CustomerEmail,
+			CustomerPhone
+		} = CustomerOrder;
+
+		const OrderId = CreateTombolaId(RawOrderId);
+
+		const CustomerDBOrder = {
+			TicketId: OrderId,
+			email: CustomerEmail,
+			firstName,
+			lastName,
+			phone: CustomerPhone
+		};
+		const NewTickets: TicketsShape[] = [...db.tickets, CustomerDBOrder];
+		const NewUserTickets: UserToTicketShape = { ...db.userToTicket, [CustomerEmail]: OrderId };
+		const NewTicketsUser: UserToTicketShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
+
+		const NewDB: DBShape = {
+			tickets: NewTickets,
+			userToTicket: NewUserTickets,
+			TicketToUser: NewTicketsUser
+		};
+		const dataToWrite = JSON.stringify(NewDB);
+		await writeFile(path.join(__dirname, "../DB/_DB.json"), dataToWrite, "utf8");
+
+		return Respond(HandleSuccess(200, { CustomerDBOrder }));
 	} catch (err) {
 		return Respond(HandleError(err));
 	}
