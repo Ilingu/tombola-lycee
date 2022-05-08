@@ -1,11 +1,20 @@
 <script lang="ts">
 	import type { TicketsShape } from "$lib/interface/interface";
 	import { PaypalOrder } from "$lib/store";
+	import { RouterPush } from "$lib/Utils/ClientFuncs";
+	import { onMount } from "svelte";
 
 	let InvoiceRaw: TicketsShape;
 	PaypalOrder.subscribe((order) => {
 		if (!order) return;
 		InvoiceRaw = order;
+	});
+
+	onMount(() => {
+		setTimeout(() => {
+			if (!InvoiceRaw) return RouterPush("/");
+			window.print();
+		}, 15000);
 	});
 </script>
 
@@ -15,7 +24,7 @@
 		<div
 			id="CustomerOrder"
 			class="bg-primary-500 ring-2 ring-primary-500 rounded-lg px-5 w-full bg-opacity-70 grid grid-cols-12 gap-y-3 pb-10 
-			pt-20 relative overflow-scroll"
+			pt-20 relative overflow-auto"
 		>
 			<h2 class="-mb-5 top-2 left-2 text-lg absolute">Votre Commande:</h2>
 			<img src="/IMG/favicon.png" alt="logo lycee" class="w-16 absolute top-2 right-2 rounded-md" />

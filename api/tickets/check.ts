@@ -9,7 +9,7 @@ import {
 } from "../utils/_ServerFunc";
 
 // DB
-import db from "../DB/_DB.json";
+// import db from "../DB/_DB.json";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	// Utils Func

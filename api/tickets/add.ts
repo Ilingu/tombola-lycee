@@ -15,9 +15,9 @@ import {
 } from "../utils/_ServerFunc";
 
 // DB
-import database from "../DB/_DB.json";
-import { writeFile } from "fs/promises";
-import path from "path";
+// import database from "../DB/_DB.json";
+// import { writeFile } from "fs/promises";
+// import path from "path";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	// Utils Func
@@ -58,23 +58,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 			lastName,
 			phone: CustomerPhone
 		};
-		const db = database as DBShape;
-		const UserTickets = db.userToTicket[CustomerEmail] || [];
+		// const db = database as DBShape;
+		// const UserTickets = db.userToTicket[CustomerEmail] || [];
 
-		const NewTickets: TicketsShape[] = [...db.tickets, CustomerDBOrder];
-		const NewUserTickets: UserToTicketsShape = {
-			...db.userToTicket,
-			[CustomerEmail]: [...UserTickets, OrderId]
-		};
-		const NewTicketsUser: TicketsToUserShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
+		// const NewTickets: TicketsShape[] = [...db.tickets, CustomerDBOrder];
+		// const NewUserTickets: UserToTicketsShape = {
+		// 	...db.userToTicket,
+		// 	[CustomerEmail]: [...UserTickets, OrderId]
+		// };
+		// const NewTicketsUser: TicketsToUserShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
 
-		const NewDB: DBShape = {
-			tickets: NewTickets,
-			userToTicket: NewUserTickets,
-			TicketToUser: NewTicketsUser
-		};
-		const dataToWrite = JSON.stringify(NewDB);
-		await writeFile(path.join(__dirname, "../DB/_DB.json"), dataToWrite, "utf8");
+		// const NewDB: DBShape = {
+		// 	tickets: NewTickets,
+		// 	userToTicket: NewUserTickets,
+		// 	TicketToUser: NewTicketsUser
+		// };
+		// const dataToWrite = JSON.stringify(NewDB);
+		// await writeFile(path.join(__dirname, "../DB/_DB.json"), dataToWrite, "utf8");
 
 		return Respond(HandleSuccess(200, { CustomerDBOrder }));
 	} catch (err) {
