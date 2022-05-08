@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.middle {
+		@apply grid flex-1 place-content-center place-items-center gap-y-8;
+	}
+	.inputType {
+		@apply p-3 w-10/12 rounded-lg outline-none transition-all focus:ring-2 focus:ring-secondary-main bg-primary-500 text-white font-semibold text-lg;
+	}
+}
+
+* {
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
+		Verdana, sans-serif;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #f2f9f9;
+}
+
+::-moz-selection {
+	color: #f2f9f9;
+	background: #2d464c;
+}
+
+::selection {
+	color: #f2f9f9;
+	background: #2d464c;
+}

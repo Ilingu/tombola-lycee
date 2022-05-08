@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+	<head>
+		<!-- Config -->
+		<meta charset="utf-8" />
+		<link rel="manifest" crossorigin="use-credentials" href="%svelte.assets%/manifest.json" />
+		<link rel="icon" href="%svelte.assets%/IMG/favicon.png" />
+		<link rel="apple-touch-icon" sizes="192x192" href="%svelte.assets%/IMG/logo-tombola.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#2d464c" />
+		<meta name="msapplication-navbutton-color" content="#3b757f" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<!-- App -->
+		<meta name="keywords" content="Tombola, MB-lycee" />
+		<meta name="author" content="Ilingu" />
+		<meta name="application-name" content="MB Tombola" />
+		<meta name="description" content="Site de la Tombola 2022 du Lycée du Mont-Blanc" />
+		<!-- Google -->
+		<meta name="robots" content="index,follow,noodp" />
+		<meta name="googlebot" content="index,follow" />
+		<!-- Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+			integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		%svelte.head%
+	</head>
+	<body class="bg-primary-800">
+		<noscript style="font-size: '40px'; font-family: 'sans-serif'; text-align: 'center'">
+			{"> "}To use ACK,{" "}
+			<a
+				href="https://www.enable-javascript.com/"
+				target="_blank"
+				rel="noopener noreferrer"
+				style="color: '#2d464c'"
+			>
+				please enable JavaScript.
+				<br />
+			</a>
+		</noscript>
+		<div id="root">%svelte.body%</div>
+	</body>
+</html>
