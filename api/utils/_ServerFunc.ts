@@ -69,3 +69,18 @@ export const Authentificator = (AuthKey: string): FunctionResponseShape => {
 	if (AuthKey !== RightKey) return { success: false };
 	return { success: true };
 };
+
+/**
+ * Randomly Suffle the Array in params
+ * @param {Array} ArrayToShuffle
+ * @returns The randomly shuffled array
+ */
+export const shuffleArray = <T>(ArrayToShuffle: T[]): T[] =>
+	ArrayToShuffle.sort(() => Math.random() - 0.5);
+
+export const CreateTombolaId = (OrderId: string) => {
+	// Ex OrderId "8XN35426C6936841M"
+	const FlattenedId = OrderId.slice(0, 8);
+	const ShuffledId = shuffleArray(FlattenedId.split("")).join("");
+	return ShuffledId;
+};

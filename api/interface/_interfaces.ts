@@ -18,3 +18,11 @@ export interface PaypalOrderShape {
 	CustomerEmail: string;
 	CustomerPhone: string;
 }
+
+export interface TicketsShape extends PaypalOrderShape {
+	TicketId: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	phone: string;
+}

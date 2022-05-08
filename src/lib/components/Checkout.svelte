@@ -43,6 +43,7 @@
 						}
 					} = OrderDetails;
 					// Set Tx To Store
+					console.log({ OrderId, firstName, lastName, CustomerEmail, CustomerPhone });
 					PaypalOrder.set({ OrderId, firstName, lastName, CustomerEmail, CustomerPhone });
 				},
 				onError: (err) => {

@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
 		// Parse Req
 		const { success: NoBodyErr, data: CustomerOrder } = await ParseRequest(body);
-		if (!NoBodyErr) return Respond(HandleError("ad Arguments", 400)); // ❌
+		if (!NoBodyErr) return Respond(HandleError("Bad Arguments", 400)); // ❌
 
 		// Authentificate
 		const { success: AuthSucceed } = Authentificator(AuthKey);
