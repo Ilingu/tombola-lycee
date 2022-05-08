@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { loadScript } from "@paypal/paypal-js";
-	import { CallApi, PushToast } from "$lib/Utils/ClientFuncs";
+	import { CallApi, PushToast, RouterPush } from "$lib/Utils/ClientFuncs";
 	import { PaypalOrder } from "$lib/store";
 
 	onMount(() => {
@@ -42,9 +42,7 @@
 							}
 						}
 					} = OrderDetails;
-					// Set Tx To Store
 					const CustomerOrder = { OrderId, firstName, lastName, CustomerEmail, CustomerPhone };
-					PaypalOrder.set(CustomerOrder);
 					const { succeed: ReqSuccess, data } = await CallApi({
 						URI: "/api/tickets/add",
 						METHOD: "POST",
@@ -59,8 +57,9 @@
 						);
 						return;
 					}
-					console.log(data);
-					PushToast("Inscrit!", "success", 10000);
+					// Set Tx To Store
+					PaypalOrder.set(data.CustomerDBOrder);
+					RouterPush("/order");
 				},
 				onError: (err) => {
 					PushToast(

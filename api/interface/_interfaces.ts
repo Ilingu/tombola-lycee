@@ -27,12 +27,16 @@ export interface TicketsShape {
 	phone: string;
 }
 
-export interface UserToTicketShape {
-	[email: string]: string; // email => OrderID
+export interface TicketsToUserShape {
+	[OrderId: string]: string; // OrderID => email
+}
+
+export interface UserToTicketsShape {
+	[email: string]: string[]; // email => [OrderID]
 }
 
 export interface DBShape {
 	tickets: TicketsShape[];
-	userToTicket: UserToTicketShape;
-	TicketToUser: UserToTicketShape;
+	userToTicket: UserToTicketsShape;
+	TicketToUser: TicketsToUserShape;
 }

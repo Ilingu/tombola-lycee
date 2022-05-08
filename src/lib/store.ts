@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
-import type { PaypalOrderShape } from "./interface/interface";
+import type { TicketsShape } from "./interface/interface";
 
-export const PaypalOrder = writable<PaypalOrderShape>();
+export const PaypalOrder = writable<TicketsShape>();

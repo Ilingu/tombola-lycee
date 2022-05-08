@@ -1,38 +1,34 @@
-# create-svelte
+# [MB Tombola] || Tombola 2022 Lycée du Mont-Blanc
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+#### **Code Source du Site de la Tombola 2022 du Lycée du Mont Blanc**
 
-## Creating a project
+[![SITE](https://forthebadge.com/images/badges/check-it-out.svg)](https://lycee-mb-tombola.vercel.app)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Site Info
 
-```bash
-# create a new project in the current directory
-npm init svelte
+[![SITE](https://img.shields.io/maintenance/yes/2022)](https://lycee-mb-tombola.vercel.app)
 
-# create a new project in my-app
-npm init svelte my-app
-```
+### Up ⬆ Or Down ⬇
 
-## Developing
+[![SITE](https://img.shields.io/website-up-down-green-red/https/lycee-mb-tombola.vercel.app.svg)](https://lycee-mb-tombola.vercel.app)  
+[![SITE](https://therealsujitk-vercel-badge.vercel.app/?app=lycee-mb-tombola)](https://vercel.com/)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Release
 
-```bash
-npm run dev
+[![SITE](https://img.shields.io/badge/release-beta%201-blue)](https://lycee-mb-tombola.vercel.app)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Technologies
 
-## Building
+[![SITE](https://img.shields.io/badge/dependencies-up%20to%20date-green)](https://www.npmjs.com/)  
+[![SITE](https://img.shields.io/static/v1?label=MADE%20WITH&message=SvelteKit&color=ff3d00)](https://kit.svelte.dev/)
 
-To create a production version of your app:
+## Compatibilities
 
-```bash
-npm run build
-```
+[![SITE](https://img.shields.io/static/v1?label=Compatible%20With&message=all&color=C13B3A)](https://lycee-mb-tombola.vercel.app)
 
-You can preview the production build with `npm run preview`.
+## Uninteresting stuff
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This is a [`SvelteKit`](https://kit.svelte.dev) project bootstrapped by [Vercel](https://vercel.com).
+
+2022 [Ilingu](https://github.com/Ilingu)  
+[![SITE](https://img.shields.io/badge/Licence-MIT-yellow)](https://github.com/Ilingu/ack_v2/blob/main/LICENSE)

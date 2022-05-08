@@ -28,3 +28,10 @@
 	color: #f2f9f9;
 	background: #2d464c;
 }
+
+@media print {
+	body {
+		background: #fff;
+		color: black;
+	}
+}

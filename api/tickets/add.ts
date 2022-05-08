@@ -1,5 +1,11 @@
 import type { VercelResponse, VercelRequest } from "@vercel/node";
-import type { ApiRes, DBShape, TicketsShape, UserToTicketShape } from "../interface/_interfaces";
+import type {
+	ApiRes,
+	DBShape,
+	TicketsShape,
+	TicketsToUserShape,
+	UserToTicketsShape
+} from "../interface/_interfaces";
 import {
 	HandleError,
 	HandleSuccess,
@@ -9,7 +15,7 @@ import {
 } from "../utils/_ServerFunc";
 
 // DB
-import db from "../DB/_DB.json";
+import database from "../DB/_DB.json";
 import { writeFile } from "fs/promises";
 import path from "path";
 
@@ -52,9 +58,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 			lastName,
 			phone: CustomerPhone
 		};
+		const db = database as DBShape;
+		const UserTickets = db.userToTicket[CustomerEmail] || [];
+
 		const NewTickets: TicketsShape[] = [...db.tickets, CustomerDBOrder];
-		const NewUserTickets: UserToTicketShape = { ...db.userToTicket, [CustomerEmail]: OrderId };
-		const NewTicketsUser: UserToTicketShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
+		const NewUserTickets: UserToTicketsShape = {
+			...db.userToTicket,
+			[CustomerEmail]: [...UserTickets, OrderId]
+		};
+		const NewTicketsUser: TicketsToUserShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
 
 		const NewDB: DBShape = {
 			tickets: NewTickets,

@@ -16,9 +16,17 @@ export interface BodyApiCall {
 	CustomerOrder: PaypalOrderShape;
 }
 
-export interface ApiRes {
+export interface ApiRes<T = object> {
 	succeed: boolean;
 	code: number;
-	data?: object;
+	data?: T;
 	message?: string;
+}
+
+export interface TicketsShape {
+	TicketId: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	phone: string;
 }

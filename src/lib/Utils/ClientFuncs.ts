@@ -2,7 +2,7 @@ import { toasts } from "svelte-toasts";
 import type { ToastProps } from "svelte-toasts/types/common";
 import type { ToastType } from "$lib/interface/types";
 import { PaypalOrder } from "$lib/store";
-import type { ApiRes, CallApiArgs, PaypalOrderShape } from "$lib/interface/interface";
+import type { ApiRes, CallApiArgs, PaypalOrderShape, TicketsShape } from "$lib/interface/interface";
 import { goto } from "$app/navigation";
 
 /**
@@ -38,8 +38,8 @@ export const PushToast = (
  * Return the current value of the Order Store
  * @returns {PaypalOrderShape} Return An Paypal Order
  */
-export const PaypalOrderSnapshot = (): Promise<PaypalOrderShape> =>
-	new Promise((res: (value: PaypalOrderShape) => void) => {
+export const PaypalOrderSnapshot = (): Promise<TicketsShape> =>
+	new Promise((res: (value: TicketsShape) => void) => {
 		const unSub = PaypalOrder.subscribe((order) => res(order));
 		unSub();
 	});
@@ -58,7 +58,11 @@ export const RouterPush = (route: string, replaceState = true) => {
  * @param {CallApiArgs} FetchArgs
  * @returns {ApiRes} Return Internal API Raw Response
  */
-export const CallApi = async ({ URI, METHOD, body }: CallApiArgs): Promise<ApiRes> => {
+export const CallApi = async ({
+	URI,
+	METHOD,
+	body
+}: CallApiArgs): Promise<ApiRes<{ CustomerDBOrder: TicketsShape }>> => {
 	try {
 		const URL = encodeURI(`${window.location.origin}${URI.startsWith("/") ? URI : `/${URI}`}`);
 		const AuthKey = import.meta.env.VITE_API_SECRET_KEY;
@@ -71,11 +75,8 @@ export const CallApi = async ({ URI, METHOD, body }: CallApiArgs): Promise<ApiRe
 			headers: { authorization: AuthKey }
 		});
 
-		console.log(APIRequest);
-
 		// Response
-		const APIResponse: ApiRes = await APIRequest.json();
-		console.log(APIResponse);
+		const APIResponse: ApiRes<{ CustomerDBOrder: TicketsShape }> = await APIRequest.json();
 		return APIResponse;
 	} catch (err) {
 		console.error(err);
