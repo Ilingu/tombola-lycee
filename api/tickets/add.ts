@@ -1,11 +1,8 @@
 import type { VercelResponse, VercelRequest } from "@vercel/node";
-import type {
-	ApiRes,
-	DBShape,
-	TicketsShape,
-	TicketsToUserShape,
-	UserToTicketsShape
-} from "../interface/_interfaces";
+// DB
+import prisma from "../utils/_prisma";
+// Utils
+import type { ApiRes, TicketsShape } from "../interface/_interfaces";
 import {
 	HandleError,
 	HandleSuccess,
@@ -13,11 +10,6 @@ import {
 	ParseRequest,
 	CreateTombolaId
 } from "../utils/_ServerFunc";
-
-// DB
-// import database from "../DB/_DB.json";
-// import { writeFile } from "fs/promises";
-// import path from "path";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	// Utils Func
@@ -34,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		if (method !== "POST") return Respond(HandleError("Only accept POST req", 400)); // ❌
 
 		// Parse Req
-		const { success: NoBodyErr, data: CustomerOrder } = await ParseRequest(body);
+		const { success: NoBodyErr, data: CustomerOrder } = ParseRequest(body);
 		if (!NoBodyErr) return Respond(HandleError("Bad Arguments", 400)); // ❌
 
 		// Authentificate
@@ -50,32 +42,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		} = CustomerOrder;
 
 		const OrderId = CreateTombolaId(RawOrderId);
-
-		const CustomerDBOrder = {
+		const CustomerDBOrder: TicketsShape = {
 			TicketId: OrderId,
 			email: CustomerEmail,
 			firstName,
 			lastName,
 			phone: CustomerPhone
 		};
-		// const db = database as DBShape;
-		// const UserTickets = db.userToTicket[CustomerEmail] || [];
 
-		// const NewTickets: TicketsShape[] = [...db.tickets, CustomerDBOrder];
-		// const NewUserTickets: UserToTicketsShape = {
-		// 	...db.userToTicket,
-		// 	[CustomerEmail]: [...UserTickets, OrderId]
-		// };
-		// const NewTicketsUser: TicketsToUserShape = { ...db.TicketToUser, [OrderId]: CustomerEmail };
-
-		// const NewDB: DBShape = {
-		// 	tickets: NewTickets,
-		// 	userToTicket: NewUserTickets,
-		// 	TicketToUser: NewTicketsUser
-		// };
-		// const dataToWrite = JSON.stringify(NewDB);
-		// await writeFile(path.join(__dirname, "../DB/_DB.json"), dataToWrite, "utf8");
-
+		await prisma.tickets.create({ data: { ...CustomerDBOrder } });
 		return Respond(HandleSuccess(200, { CustomerDBOrder }));
 	} catch (err) {
 		return Respond(HandleError(err));

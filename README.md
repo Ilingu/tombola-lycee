@@ -15,7 +15,7 @@
 
 ### Release
 
-[![SITE](https://img.shields.io/badge/release-beta%201-blue)](https://lycee-mb-tombola.vercel.app)
+[![SITE](https://img.shields.io/badge/release-beta-blue)](https://lycee-mb-tombola.vercel.app)
 
 ## Technologies
 

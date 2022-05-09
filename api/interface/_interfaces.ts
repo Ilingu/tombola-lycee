@@ -25,18 +25,6 @@ export interface TicketsShape {
 	lastName: string;
 	email: string;
 	phone: string;
-}
-
-export interface TicketsToUserShape {
-	[OrderId: string]: string; // OrderID => email
-}
-
-export interface UserToTicketsShape {
-	[email: string]: string[]; // email => [OrderID]
-}
-
-export interface DBShape {
-	tickets: TicketsShape[];
-	userToTicket: UserToTicketsShape;
-	TicketToUser: TicketsToUserShape;
+	createAt?: Date;
+	updateAt?: Date;
 }

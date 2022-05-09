@@ -1,20 +1,11 @@
 <script lang="ts">
 	import type { TicketsShape } from "$lib/interface/interface";
 	import { PaypalOrder } from "$lib/store";
-	import { RouterPush } from "$lib/Utils/ClientFuncs";
-	import { onMount } from "svelte";
 
 	let InvoiceRaw: TicketsShape;
 	PaypalOrder.subscribe((order) => {
 		if (!order) return;
 		InvoiceRaw = order;
-	});
-
-	onMount(() => {
-		setTimeout(() => {
-			if (!InvoiceRaw) return RouterPush("/");
-			window.print();
-		}, 15000);
 	});
 </script>
 

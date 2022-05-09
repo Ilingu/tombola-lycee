@@ -1,3 +1,1 @@
-import type { PaypalOrderShape } from "./_interfaces";
-
-export type JSONFormatter = { [k: string]: PaypalOrderShape };
+export type JSONFormatter<T> = { [k: string]: T };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	// UI
 </script>
 
-<h1>About</h1>
+<h1>About Us: </h1>
+<p>Nothing 😅</p>

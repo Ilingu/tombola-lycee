@@ -1,7 +1,9 @@
 import type { VercelResponse, VercelRequest } from "@vercel/node";
+// DB
+import prisma from "../utils/_prisma";
+// Utils
 import type { ApiRes } from "../interface/_interfaces";
-
-import { HandleError } from "../utils/_ServerFunc";
+import { HandleError, HandleSuccess } from "../utils/_ServerFunc";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	// Utils Func
@@ -12,8 +14,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	try {
 		// Request Verifier
 		const { method } = req;
-		if (method !== "DELETE") return Respond(HandleError("Only accept DELETE req", 400)); // ❌
-		return Respond(HandleError("Functionnality not implemented yet", 500)); // ❌
+		if (method !== "GET") return Respond(HandleError("Only accept GET req", 400)); // ❌
+
+		const NumberOfTickets = await prisma.tickets.count({});
+		return Respond(HandleSuccess(200, { RaisedAmount: NumberOfTickets * 2 }));
 	} catch (err) {
 		return Respond(HandleError(err));
 	}

@@ -29,4 +29,6 @@ export interface TicketsShape {
 	lastName: string;
 	email: string;
 	phone: string;
+	createAt?: Date;
+	updateAt?: Date;
 }

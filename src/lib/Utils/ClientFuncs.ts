@@ -49,7 +49,7 @@ export const PaypalOrderSnapshot = (): Promise<TicketsShape> =>
  * @param {string} route
  * @param {boolean} replaceState
  */
-export const RouterPush = (route: string, replaceState = true) => {
+export const RouterPush = (route: string, replaceState = false) => {
 	goto(route.startsWith("/") ? route : `/${route}`, { replaceState });
 };
 
@@ -74,6 +74,7 @@ export const CallApi = async ({
 			body: JSON.stringify(body),
 			headers: { authorization: AuthKey }
 		});
+		if (!APIRequest.ok) throw new Error("Request Failed");
 
 		// Response
 		const APIResponse: ApiRes<{ CustomerDBOrder: TicketsShape }> = await APIRequest.json();

@@ -32,17 +32,24 @@ export const HandleSuccess = (code?: number, data?: object): ApiRes => ({
 });
 
 /**
- * Parse The Request Obj From API
- * @param {Body} request
- * @returns {ParseReqShape} An object with the validity of the req and if valid the request data
+ * Decrypt The Request Obj From API
+ * @param {Body} body
+ * @returns {JSONFormatter} An object with the validity of the req and if valid the request data
  */
-export const ParseRequest = async (
-	body: string
-): Promise<FunctionResponseShape<PaypalOrderShape>> => {
-	let data: JSONFormatter;
-	if (typeof body === "object") data = body;
-	if (typeof body === "string") data = JSON.parse(body);
-	if (!body || !data) return { success: false };
+export const DecryptRequest = <T>(body: string): JSONFormatter<T> => {
+	if (typeof body === "object") return body;
+	if (typeof body === "string") return JSON.parse(body);
+	return null;
+};
+
+/**
+ * Parse The Request Obj From API
+ * @param {Body} body
+ * @returns {PaypalOrderShape} An object with the validity of the req and if valid the request data
+ */
+export const ParseRequest = (body: string): FunctionResponseShape<PaypalOrderShape> => {
+	const data = DecryptRequest<PaypalOrderShape>(body);
+	if (!data) return { success: false };
 
 	const CustomerOrder = data["CustomerOrder"];
 	if (!CustomerOrder) return { success: false };
